@@ -1,3 +1,7 @@
+-- How pull
+
+git pull https://github.com/MASVictoryLeap/MAS_VictoryLeap.git
+
 -- How push
 
 git remote add origin https://github.com/MASVictoryLeap/MAS_VictoryLeap.git

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -26,7 +27,7 @@ public class LoginActivity extends Activity {
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
 	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
+	public static String[] DUMMY_CREDENTIALS = new String[] {
 			"foo@example.com:hello", "bar@example.com:world" };
 
 	/**
@@ -130,18 +131,13 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
 		}
-
 		// Check for a valid email address.
 		if (TextUtils.isEmpty(mEmail)) {
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!mEmail.contains("@")) {
+		} else if ((!mEmail.contains("@")) || (!mEmail.contains("."))) {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
@@ -230,27 +226,35 @@ public class LoginActivity extends Activity {
 			// TODO: register the new account here.
 
 			
-			return true;
+			return false;
 		}
 
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
-
+			AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
 			if (success) {
 				//finish(); //exit the screen
-				AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
-				alert.setTitle("Successfully Logged In");
-				alert.setMessage("Congrat!");
+			
+				alert.setTitle("Logged In Successfully");
+				alert.setMessage("Congratulation!");
+				alert.setPositiveButton("OK",
+						  new DialogInterface.OnClickListener() {
+						    public void onClick(DialogInterface dialog,int id) {
+							dialog.cancel(); } });
 				alert.show();
-			   
-				
-				
 			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				mPasswordView.requestFocus();
+		
+				alert.setTitle("Logged In Failed");
+				alert.setMessage("Invalid Account!");
+				alert.setPositiveButton("OK",
+						  new DialogInterface.OnClickListener() {
+						    public void onClick(DialogInterface dialog,int id) {
+							dialog.cancel(); } });
+				alert.show();
+				mPasswordView.setText("");
+				mEmailView.setText("");
 			}
 		}
 

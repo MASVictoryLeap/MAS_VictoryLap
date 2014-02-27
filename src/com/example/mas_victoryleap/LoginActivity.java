@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
- * well.
+ * well.just testing now
  */
 public class LoginActivity extends Activity {
 	/**

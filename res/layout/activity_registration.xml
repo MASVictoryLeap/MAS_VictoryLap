@@ -28,8 +28,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="85dp"
             android:ems="10"
-            android:hint="Email"
-            android:inputType="textPassword"
+           android:inputType="textEmailAddress"
+                android:maxLines="1"
+                
+                 android:hint="@string/prompt_email"
             android:textColor="#FFFFFF" >
 
             <requestFocus />

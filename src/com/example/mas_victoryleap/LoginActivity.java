@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -111,6 +113,15 @@ public class LoginActivity extends Activity {
 		mEmail = mEmailView.getText().toString();
 		mPassword = mPasswordView.getText().toString();
 
+		//if both fields are emptied, then register new account
+		if((mEmail.length()==0)&&(mPassword.length()==0)){
+			 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+             startActivity(intent);  
+		}
+		
+		else{
+		
+		
 		boolean cancel = false;
 		View focusView = null;
 
@@ -147,6 +158,7 @@ public class LoginActivity extends Activity {
 			showProgress(true);
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
+		}
 		}
 	}
 
@@ -216,6 +228,8 @@ public class LoginActivity extends Activity {
 			}
 
 			// TODO: register the new account here.
+
+			
 			return true;
 		}
 
@@ -225,7 +239,14 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				finish();
+				//finish(); //exit the screen
+				AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+				alert.setTitle("Successfully Logged In");
+				alert.setMessage("Congrat!");
+				alert.show();
+			   
+				
+				
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

@@ -233,28 +233,25 @@ public class LoginActivity extends Activity {
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
-			AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
-			if (success) {
-				//finish(); //exit the screen
+
 			
-				alert.setTitle("Logged In Successfully");
-				alert.setMessage("Congratulation!");
-				alert.setPositiveButton("OK",
-						  new DialogInterface.OnClickListener() {
-						    public void onClick(DialogInterface dialog,int id) {
-							dialog.cancel(); } });
-				alert.show();
+			//transit to mainActivity if account is valid, else displays invalid account alert and clears the fields
+			if (success) {
+				 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+	             startActivity(intent);
+				
 			} else {
-		
-				alert.setTitle("Logged In Failed");
-				alert.setMessage("Invalid Account!");
+				AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+				alert.setTitle(getString(R.string.promp_error));
+				alert.setMessage(getString(R.string.error_invalid_account));
 				alert.setPositiveButton("OK",
 						  new DialogInterface.OnClickListener() {
 						    public void onClick(DialogInterface dialog,int id) {
 							dialog.cancel(); } });
 				alert.show();
-				mPasswordView.setText("");
-				mEmailView.setText("");
+				mPasswordView.setText(null); 
+				mEmailView.setText(null);
+				
 			}
 		}
 

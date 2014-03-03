@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MAS_VictoryLeap</string>
+    <string name="app_name">Time Management</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_registration">RegistrationActivity</string>
-    <string name="title_activity_show_details">ShowDetailsActivity</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_show_details">Details</string>
+    <string name="title_activity_main">Menu</string>
+    <string name="title_activity_top_rated">TopRatedActivity</string>
+    <string name="title_activity_utilities">UtilitiesActivity</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
 
 </resources>

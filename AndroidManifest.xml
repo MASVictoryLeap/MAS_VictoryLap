@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name="com.example.mas_victoryleap.MainActivity"
-            android:label="@string/title_activity_login"
+            android:label="@string/title_activity_main"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
@@ -34,6 +34,18 @@
         <activity
             android:name="com.example.mas_victoryleap.ShowDetailsActivity"
             android:label="@string/title_activity_show_details" >
+        </activity>
+        <activity
+            android:name="com.example.mas_victoryleap.TopRatedActivity"
+            android:label="@string/title_activity_top_rated" >
+        </activity>
+        <activity
+            android:name="com.example.mas_victoryleap.UtilitiesActivity"
+            android:label="@string/title_activity_utilities" >
+        </activity>
+        <activity
+            android:name="com.example.mas_victoryleap.MainMenuActivity"
+            android:label="@string/title_activity_main_menu" >
         </activity>
     </application>
 

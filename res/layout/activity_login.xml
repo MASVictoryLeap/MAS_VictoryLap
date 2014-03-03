@@ -6,19 +6,18 @@
 
     <LinearLayout
         android:id="@+id/login_status"
-       android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:background="@drawable/bg_image2"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="gone" 
-             android:background="@drawable/bg_image2">
+        android:visibility="gone" >
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-   			
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -28,8 +27,8 @@
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif-light"
             android:text="@string/login_progress_signing_in"
-             android:textColor="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
     <!-- Login form -->
@@ -39,19 +38,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_image2" >
-        
+
         <LinearLayout
             style="@style/LoginFormContainer"
             android:layout_height="447dp"
             android:orientation="vertical" >
-            
+
             <ImageView
-        		android:id="@+id/logo"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:layout_centerHorizontal="true"
-        		android:layout_centerVertical="true"
-        		android:src="@drawable/logo" />
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/logo" />
 
             <EditText
                 android:id="@+id/email"
@@ -61,8 +60,8 @@
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                 android:textColor="#FFFFFF"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/password"
@@ -73,9 +72,9 @@
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
-                android:textColor="#FFFFFF"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/sign_in_button"
@@ -85,8 +84,8 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                 android:textColor="#FFFFFF"
-                android:text="@string/action_sign_in_register" />
+                android:text="@string/action_sign_in_register"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </ScrollView>
 

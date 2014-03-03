@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    
+    
+        <!-- Strings related to register -->
+        
+        <string name="prompt_first_name">First Name</string>
+     	<string name="prompt_last_name">Last Name</string>
+     	<string name="error_cannot_create_account">Sorry. Your account cannot create at this time. Please try again later</string>
+		<string name="register_progress_signing_in">Creating new account &#8230;</string>
+</resources>

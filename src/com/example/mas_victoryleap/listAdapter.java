@@ -1,6 +1,11 @@
 package com.example.mas_victoryleap;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +15,16 @@ import android.widget.TextView;
 
 public class listAdapter extends ArrayAdapter<String> {
   private final Context context;
-  private final String[] values;
+  private final ArrayList<String> applicationName;
 
-  public listAdapter(Context context, String[] values) {
+  private HashMap<String,ApplicationUtilities>ProcessTable;
+  
+  //constructor
+  public listAdapter(Context context, ArrayList<String> values, HashMap<String,ApplicationUtilities> processes) {
     super(context, R.layout.activity_apps_row, values);
     this.context = context;
-    this.values = values;
+    applicationName = values;
+    ProcessTable=processes;
   }
 
   @Override
@@ -23,19 +32,23 @@ public class listAdapter extends ArrayAdapter<String> {
     LayoutInflater inflater = (LayoutInflater) context
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     View rowView = inflater.inflate(R.layout.activity_apps_row, parent, false);
+    
     TextView textView = (TextView) rowView.findViewById(R.id.label);
     TextView app_description = (TextView)rowView.findViewById(R.id.tv_app_description);
     ImageView icon_logo = (ImageView) rowView.findViewById(R.id.icon);
-    textView.setText(values[position]);
-    // change the icon for Windows and iPhone
-    String s = values[position];
-    if (s.startsWith("iPhone")) {
-      icon_logo.setImageResource(R.drawable.apple_logo);
-      app_description.setText("apple is the best in town");
-    } else {
-      icon_logo.setImageResource(R.drawable.android_logo);
-    }
 
+    textView.setText(ProcessTable.get(applicationName.get(position)).getAppName());
+    app_description.setText(""+ProcessTable.get(applicationName.get(position)).getMemoryUsage());
+  
+    
+    // display application icon or default icon if application doesnt have an icon
+    if(ProcessTable.get(applicationName.get(position)).getAppIcon()!=null){
+    	 icon_logo.setImageDrawable(ProcessTable.get(applicationName.get(position)).getAppIcon());
+    }
+    else
+    	icon_logo.setImageResource(R.drawable.android_logo);
+
+    
     return rowView;
   }
   

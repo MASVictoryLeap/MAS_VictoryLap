@@ -1,4 +1,4 @@
-package info.androidhive.tabsswipe.adapter;
+package info.tabsswipe.adapter;
 
 import com.example.mas_victoryleap.R;
 

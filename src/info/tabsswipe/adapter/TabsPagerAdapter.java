@@ -1,17 +1,19 @@
-package info.androidhive.tabsswipe.adapter;
+package info.tabsswipe.adapter;
 
 
-import info.androidhive.tabsswipe.adapter.AppsPageFragment;
-import info.androidhive.tabsswipe.adapter.UtilitiesFragment;
-import info.androidhive.tabsswipe.adapter.TopRatedFragment;
+import info.tabsswipe.adapter.AppsPageFragment;
+import info.tabsswipe.adapter.TopPlayersFragment;
+import info.tabsswipe.adapter.UtilitiesFragment;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
- 
-    public TabsPagerAdapter(FragmentManager fm) {
+	Context context;
+    public TabsPagerAdapter(FragmentManager fm, Context e) {
         super(fm);
+        this.context=e;
     }
  
     @Override
@@ -20,13 +22,13 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (index) {
         case 0:
             // Top Rated fragment activity
-            return new AppsPageFragment();
+            return new AppsPageFragment(context);
         case 1:
             // Utilities fragment activity
             return new UtilitiesFragment();
         case 2:
             // Top Rated fragment activity
-            return new TopRatedFragment();
+            return new TopPlayersFragment();
         }
  
         return null;

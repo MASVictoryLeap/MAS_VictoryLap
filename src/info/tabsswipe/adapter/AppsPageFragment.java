@@ -1,6 +1,11 @@
-package info.androidhive.tabsswipe.adapter;
+package info.tabsswipe.adapter;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import com.example.mas_victoryleap.ApplicationUtilities;
 import com.example.mas_victoryleap.LoginActivity;
 import com.example.mas_victoryleap.R;
 import com.example.mas_victoryleap.listAdapter;
@@ -19,33 +24,85 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ListFragment;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.drawable.Drawable;
 
-@SuppressLint("NewApi")
+@SuppressLint({ "NewApi", "ValidFragment" })
 public class AppsPageFragment extends Fragment implements View.OnClickListener{
 	Button buttonPressed;
-	static final String[] items = 
-            new String[] { "Android", "iPhone", "WindowsMobile", "Blackberry","item2","item3",
-            		"item4","item5","item6","item67","item533","3432","34234","4322221"};
+	//private String[]processList;
+	private ArrayList<String>processList;
+	private Drawable [] icons;
 	TextView title;
-
+	HashMap<String,ApplicationUtilities> tableOfProcess= new HashMap<String,ApplicationUtilities>();
+	
+	private List<RunningAppProcessInfo> process;
+	private ActivityManager activityMan;
+	Context context;
+	
+	
+	public AppsPageFragment(Context thisContext){
+		context=thisContext;
+	}
+	
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 		
   
         View rootView = inflater.inflate(R.layout.activity_apps_page, container, false);
+        Context context=getActivity();
+        
         title=(TextView)rootView.findViewById(R.id.title);
-        
-        
+		//Activity Manager
+		activityMan = (ActivityManager)context.getSystemService(context.ACTIVITY_SERVICE);
+		process = activityMan.getRunningAppProcesses();
+		PackageManager packMan= context.getPackageManager();
+		//processList=new String[process.size()];
+		processList=new ArrayList();
+		String str=null;
+		ApplicationUtilities proc;
+		for(int i=0; i<process.size();i++){
+			//processList[i]=process.get(i).processName;
+			try {
+				str=(String) packMan.getApplicationLabel(packMan.getApplicationInfo(process.get(i).processName, PackageManager.GET_META_DATA));
+				
+				//the String str might retrieve a process that has null Label
+				//therefore, must check it before get the icon
+				if (str!=null){
+					processList.add(str);
+					proc= new ApplicationUtilities(context,process.get(i));
+					tableOfProcess.put(str, proc);
+					
+				}
+				
+			
+			} catch (NameNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			
+		}
+		
+		
+
+		
+		
+		
         
         ListView listview= (ListView)rootView.findViewById(R.id.lv_apps);
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items); 
+                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, processList); 
 
-                 listview.setAdapter(new listAdapter(getActivity(),items));  
+                 listview.setAdapter(new listAdapter(getActivity(),processList,tableOfProcess));  
                  
                
                  listview.setOnItemClickListener(new OnItemClickListener() {
@@ -53,7 +110,7 @@ public class AppsPageFragment extends Fragment implements View.OnClickListener{
                 	    @Override             
                 	    public void onItemClick(AdapterView<?> parent, View
                 	    view, int position, long id) { 
-                	    	title.setText("YOU SELECTED "+ position);
+                	    	title.setText("YOU SELECTED "+processList.get(position)+ "AT INDEX:"+position);
                 	    	
                 	    	
                 	    }

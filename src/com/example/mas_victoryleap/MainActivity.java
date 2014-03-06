@@ -1,6 +1,6 @@
 package com.example.mas_victoryleap;
 
-import info.androidhive.tabsswipe.adapter.TabsPagerAdapter;
+import info.tabsswipe.adapter.TabsPagerAdapter;
 
 import java.util.List;
 
@@ -13,10 +13,14 @@ import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -27,7 +31,7 @@ import android.view.View.OnClickListener;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity  extends FragmentActivity implements ActionBar.TabListener {
 
-	private PackageManager PM;
+	private PackageManager packMan;
 	private List<RunningAppProcessInfo> process;
 	private ActivityManager activityMan;
 	
@@ -35,21 +39,22 @@ public class MainActivity  extends FragmentActivity implements ActionBar.TabList
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
-    private String[] tabs = { "Apps", "Utilities", "Top Rated" };
+    private String[] tabs = { "Apps", "Utilities", "Top Players" };
     
+    private String[]processList;
+    private Drawable[]icons;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//Activity Manager
-		activityMan = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-		process = activityMan.getRunningAppProcesses();
+	
+		
 		
 		
 		viewPager=(ViewPager)findViewById(R.id.pager);
 		actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        mAdapter = new TabsPagerAdapter(getSupportFragmentManager(),getApplicationContext());
  
         
         viewPager.setAdapter(mAdapter);
@@ -62,14 +67,13 @@ public class MainActivity  extends FragmentActivity implements ActionBar.TabList
                     .setTabListener(this));
         }
         /**
-         * on swiping the viewpager make respective tab selected
+         * change tab selected corresponds to change in viewpager
+         * 
          * */
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
  
             @Override
             public void onPageSelected(int position) {
-                // on changing the page
-                // make respected tab selected
                 actionBar.setSelectedNavigationItem(position);
             }
  

@@ -4,11 +4,11 @@
     android:padding="6dip" >
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="70px"
-        android:layout_height="70px"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="20px"
-        android:layout_marginTop="5px"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/apple_logo" >
     </ImageView>
 

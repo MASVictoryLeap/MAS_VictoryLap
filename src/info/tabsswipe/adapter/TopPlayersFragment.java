@@ -1,4 +1,4 @@
-package info.androidhive.tabsswipe.adapter;
+package info.tabsswipe.adapter;
 
 import com.example.mas_victoryleap.R;
 
@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class TopRatedFragment extends Fragment {
+public class TopPlayersFragment extends Fragment {
+	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  

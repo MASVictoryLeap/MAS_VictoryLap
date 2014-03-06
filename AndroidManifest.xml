@@ -3,9 +3,20 @@
     package="com.example.mas_victoryleap"
     android:versionCode="1"
     android:versionName="1.0" >
-
+  <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.SET_PROCESS_LIMIT"/>
+    <uses-permission android:name="android.permission.BATTERY_STATS"/> 
+    
+    
+    
     <uses-sdk
         android:minSdkVersion="8"
+        
         android:targetSdkVersion="18" />
 
     <application
